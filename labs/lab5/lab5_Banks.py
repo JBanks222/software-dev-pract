@@ -29,3 +29,14 @@ distance = calculate_distance(x1, x2, y1, y2)
 print_distance_result(x1, x2, y1, y2, distance)
 
 print("\n--- EXCERCISE---\n")
+
+
+# Guess a number exercise
+# Generate a random number between 1 and 10
+random_number = generate_random_number(1, 10)
+
+# Get user input for the guess
+guess = int(input("Guess a number between 1 and 10: "))
+
+# Compare the guess with the random number
+compare_guess(random_number, guess)
