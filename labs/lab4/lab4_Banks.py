@@ -69,3 +69,26 @@ contacts.update({"Eve": "718-222-3333"})
 print(f"dictionary after using update method to add a new entry: {contacts}\n")
 
 print("\n--- EXCERCISE---\n")
+
+# Read the users list and count email providers
+users = ["peterpan@yahoo.com","annie@hotmail.com","Carl@hotmail.com","martha@gmail.com","cassie@yahoo.com","Josue@hotmail.com","John@hotmail.com"]
+
+# Initialize the email count dictionary
+email_counts = {
+    "gmail": 0,
+    "hotmail": 0,
+    "yahoo": 0
+}
+
+# Count each email provider
+for email in users:
+    if "gmail" in email:
+        email_counts["gmail"] += 1
+    elif "hotmail" in email:
+        email_counts["hotmail"] += 1
+    elif "yahoo" in email:
+        email_counts["yahoo"] += 1
+
+# Print the results
+print(f"Email provider counts: {email_counts}\n")
+
