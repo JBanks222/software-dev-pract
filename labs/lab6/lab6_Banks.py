@@ -92,7 +92,7 @@ class BankAccount(object):
     # method to print the balance of the account
     def balance(self):
         username = "Ray Jay"
-        print(f"{username}'s Final balance $ {self.account_balance:.2f}")
+        print(f"{username}'s Final balance = ${self.account_balance:.2f}")
 
 # Creating an instance of the BankAccount class
 useraccount = BankAccount(123456789, "Ray Jay")
