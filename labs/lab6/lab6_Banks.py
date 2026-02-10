@@ -32,6 +32,11 @@ class Rectangle(object):
     # method to calculate the perimeter of the rectangle
     def perimeter(self):
         return 2 * (self.w + self.h)
+    # method to draw the rectangle using matplotlib
+    def draw_rectangle(self):
+        plt.gca().add_patch(plt.Rectangle((0, 0), self.w, self.h, color=self.c))
+        plt.axis('scaled') # this keeps the aspect ratio equal
+        plt.show()
 
 # create an instance of a object
 circle1 = Circle(5, "red")
@@ -56,12 +61,6 @@ print(f"radius of circle2 after adding 6 is {circle2.r}")
 # call methods in class rectangle
 print(f"area of rectangle 1 = {rectangle1.area()}")
 print(f"the area of rectangle 2 = {rectangle2.area()}") 
-
-#method to draw the rectangle using matplotlib
-def draw_rectangle(self):
-    plt.gca().add_patch(plt.Rectangle((0, 0), self.w, self.h, color=self.c))
-    plt.axis('scaled') # this keeps the aspect ratio equal
-    plt.show()
 
 #draw rectangle2
 rectangle1.draw_rectangle()
