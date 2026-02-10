@@ -3,7 +3,7 @@ Jalen Banks
 Feb 10 
 classes and objects and methods
 """
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 print("\n-----Example 1: classes-----\n")
 # a class is like a blueprint of something
@@ -33,7 +33,7 @@ class Rectangle(object):
     def perimeter(self):
         return 2 * (self.w + self.h)
     # method to draw the rectangle using matplotlib
-    def draw_rectangle(self):
+    #def draw_rectangle(self):
         plt.gca().add_patch(plt.Rectangle((0, 0), self.w, self.h, color=self.c))
         plt.axis('scaled') # this keeps the aspect ratio equal
         plt.show()
@@ -63,6 +63,41 @@ print(f"area of rectangle 1 = {rectangle1.area()}")
 print(f"the area of rectangle 2 = {rectangle2.area()}") 
 
 #draw rectangle2
-rectangle1.draw_rectangle()
+#rectangle1.draw_rectangle()
 
 print("\n-----EXCERCISE: Bank Account Class-----\n")
+
+class BankAccount(object):
+    def __init__(self, account_number, account_holder):
+        self.account_number = account_number
+        self.account_holder = account_holder
+        self.account_balance = 250.50
+    
+    # method to deposit money into the account
+    def deposit(self, amount):
+        self.account_balance += amount
+        print(f"Deposit: ${amount} - New balance: ${self.account_balance:.2f}")
+        return self.account_balance
+    
+    # method to withdraw money from the account
+    def withdraw(self, amount):
+        if amount > self.account_balance:
+            print(f"Insufficient funds - Cannot withdraw ${amount}. Current balance: ${self.account_balance:.2f}")
+            return self.account_balance
+        else:
+            self.account_balance -= amount
+            print(f"Withdrawal: ${amount} - New balance: ${self.account_balance:.2f}")
+            return self.account_balance
+    
+    # method to print the balance of the account
+    def balance(self):
+        username = "Ray Jay"
+        print(f"{username}'s Final balance $ {self.account_balance:.2f}")
+
+# Creating an instance of the BankAccount class
+useraccount = BankAccount(123456789, "Ray Jay")
+# Demonstrating deposits and withdrawals
+useraccount.withdraw(700)
+useraccount.deposit(1000)
+useraccount.withdraw(500)
+useraccount.balance()
