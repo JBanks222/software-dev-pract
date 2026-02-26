@@ -108,3 +108,85 @@ plt.legend()
 plt.show(block=True)
 
 input("Press Enter to exit...")
+
+print("\n Lab Exercise") 
+
+# step 1, data collection
+url = "https://raw.githubusercontent.com/openfootball/football.json/master/2020-21/en.1.pkl"
+file_name = "epl_matches.pkl"
+fallback_url = "https://raw.githubusercontent.com/openfootball/football.json/master/2020-21/en.1.json"
+
+matches = pd.DataFrame()
+print("\n downloading the pickle file...")
+response = requests.get(url)
+if response.status_code == 200:
+    with open(file_name, "wb") as f:
+        f.write(response.content)
+    print("Pickle file downloaded successfully.")
+else:
+    print(f"Pickle URL unavailable (status {response.status_code}). Trying JSON fallback...")
+    response = requests.get(fallback_url)
+    if response.status_code == 200:
+        json_data = response.json()
+        rows = []
+        for match in json_data['matches']:
+            team1_goals = match['score']['ft'][0]
+            team2_goals = match['score']['ft'][1]
+            rows.append({
+                'Round': match['round'],
+                'Date': match['date'],
+                'Team 1': match['team1'],
+                'Team 2': match['team2'],
+                'FT': f"{team1_goals}-{team2_goals}"
+            })
+
+        matches = pd.DataFrame(rows)
+        matches.to_pickle(file_name)
+        print("JSON downloaded and converted to pickle successfully.")
+    else:
+        print(f"Error: Failed to download fallback JSON file. Status code: {response.status_code}")
+
+# step 2, create dataframe from the pickle file (or fallback dataframe)
+if matches.empty and pd.io.common.file_exists(file_name):
+    matches = pd.read_pickle(file_name)
+
+if matches.empty:
+    print("No EPL data available. Skipping Lab Exercise analysis.")
+else:
+    print("\n MATCHES DATAFRAME")
+    print("\nMatches from pickle file:")
+    print(matches.head())
+
+    # step 3, working with the data in matches dataframe
+    # filter Liverpool matches
+    liverpool_matches = matches[(matches['Team 1'] == 'Liverpool FC') | (matches['Team 2'] == 'Liverpool FC')]
+
+    liverpool_home = liverpool_matches[liverpool_matches['Team 1'] == 'Liverpool FC']
+    liverpool_away = liverpool_matches[liverpool_matches['Team 2'] == 'Liverpool FC']
+
+    print("\n Liverpool home matches")
+    print(liverpool_home.head())
+
+    # calculate average goals for home and away matches
+    home_avg_goals = liverpool_home['FT'].str.split('-', expand=True)[0].astype(int).mean()
+    away_avg_goals = liverpool_away['FT'].str.split('-', expand=True)[1].astype(int).mean()
+
+    print(f"\nAverage goals for Liverpool home matches: {home_avg_goals}")
+    print(f"Average goals for Liverpool away matches: {away_avg_goals}")
+
+    metrics = ['Goals']
+    home_values = [home_avg_goals]
+    away_values = [away_avg_goals]
+
+    x = range(len(metrics))
+    bar_width = 0.35
+
+    plt.figure(figsize=(8,5))
+    plt.bar([i - bar_width/2 for i in x], home_values, width=bar_width, label='Home', color='blue')
+    plt.bar([i + bar_width/2 for i in x], away_values, width=bar_width, label='Away', color='red')
+    plt.xticks(x, metrics)
+    plt.xlabel('Metrics')
+    plt.ylabel('Average Goals')
+    plt.title('Liverpool FC: Home and Away Goals')
+    plt.legend()
+    plt.show(block=True)
