@@ -23,17 +23,6 @@ def test_divide_by_zero():
     with pytest.raises(ValueError):
         divide(3,0)
   
-  # lab  excercise 2
-
-def test_valid_password():
-    assert validate_password("peterpan") is True
-    
-def test_short_password():
-    assert validate_password("peter") is False
-
-def test_special_character_password():
-    assert validate_password("peter pan") is False
-    
 # lab excercise 3
 # parametrized tests allow us to run the same test function with different sets of input data. This is useful for testing a function with multiple inputs without having to write separate test functions for each case. We can use the @pytest.mark.parametrize decorator to achieve this.
 @pytest.mark.parametrize("n, expected"
@@ -47,5 +36,15 @@ def test_special_character_password():
 def test_is_even(n, expected):
     assert is_even(n) == expected
 
-# lab excercise 4 
-#create a parameter test for exercise 2
+# lab excercise 4 - password validation
+@pytest.mark.parametrize(
+    "password, expected",
+    [
+        ("peterpan", True),
+        ("peter", False),
+        ("peter pan", False),
+    ],
+)
+def test_validate_password(password, expected):
+    assert validate_password(password) is expected
+
