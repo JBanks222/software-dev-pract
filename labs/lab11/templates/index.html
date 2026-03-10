@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1 class="title">Jalen Banks</h1>
+    <h2 class="subtitle">Welcome to Flask {{ username }}</h2>
+    <p class="subtitle">Welcome to my Flask web application!</p>
+    <h2 class="subtitle">Lists</h2>
+    <ul>
+        {% for fruit in listfruits %}
+        <li>{{ fruit }}</li>
+        {% endfor %}
+    </ul>
+    {% if fruit in listfruits %}
+    <p class="instock">Great! we have {{f}} today!</p>
+
+    {%else%}
+    <p class="outofstock">Sorry, we do not have {{fruit}} in stock today.</p>
+    {% endif %}
+
+
+    <figure>
+        <!-- Use url_for to reference the image in the static folder -->
+        <img src="{{ url_for('static', filename='images/owl.jpg') }}" alt="Description of image">
+    </figure>
+</body>
+</html>
