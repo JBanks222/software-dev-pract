@@ -27,7 +27,7 @@ def about():
 
 @app.route('/quotes')
 def quotes():
-    return '<h1>Famous Quotes</h1><p>"The only limit to our realization of tomorrow is our doubts of today." - Franklin D. Roosevelt</p>'
+    return render_template('quotes.html')
 
 # set the 'app' to run if you excute this file directly (not imported as a module)
 if __name__ == '__main__':

@@ -21,3 +21,23 @@ img {
     width: 50%;
     align-content: center;
 }
+
+/* base.html */
+
+.maincontainer{
+    padding:2rem;  
+    border: solid gray 2px;
+    background-color: aliceblue;
+    width: 700px;
+    margin: 2rem auto;
+}
+
+.footer{
+    padding: 2rem;
+    border: solid gray 2px;
+    background-color: aliceblue;
+    width: 700px;
+    margin: 2rem auto;
+    text-align: center;
+}
+
