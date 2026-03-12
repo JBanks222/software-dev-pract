@@ -22,7 +22,8 @@ def index():
 # endpoints refer to the name of the view in the app
 @app.route('/about')
 def about():
-    return '<h1>About us</h1>'
+    images = ['images/owl.jpg', 'images/cat1.png', 'images/cat2.png']
+    return render_template('about.html', images=images)
 
 @app.route('/quotes')
 def quotes():
