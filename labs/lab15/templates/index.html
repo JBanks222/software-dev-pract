@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Item</title>
+</head>
+<body>
+    <h2>Create Item by Jalen Banks</h2>
+    <form id="itemform">
+        <div>
+            <label>
+                Name: 
+                <input type="text" id="name" required>
+            </label>
+        </div>
+
+        <div>
+            <label>
+                Price: 
+                <input type="number" id="price" required>
+            </label>
+        </div>
+
+        <div>
+            <label>
+                <button type="submit">Submit</button>
+            </label>
+        </div>
+
+        <p id="response"></p>
+    </form>
+    <!-- LOADING ITEM -->
+        <section>
+            <hr>
+            <h2>ALL ITEMS</h2>
+            <button onclick="loaditems()">LOAD ITEMS</button>
+
+            <ul id="itemslist"> </ul>
+        </section>
+
+        <!-- TABLE TO UPDATE AN ITEM NAME AND PRICE -->
+        <section id="updatesection" style="display: none;">
+            <h3>Update Item</h3>
+            <input type="hidden" id="updateID">
+            <label>
+                Name: <input type="text" id="updateName">
+            </label>
+
+            <label>
+                Price: <input type="text" id="updatePrice">
+            </label>
+
+            <button onclick="updateItem()">SAVE UPDATE</button>
+        </section>
+
+
+    <script>
+        document.querySelector("#itemform").addEventListener("submit", async function(e){
+            // Prevent the from to clear the data after submission
+            e.preventDefault()
+
+            // Collect values from the form
+            const name = document.querySelector("#name").value
+            const price = document.querySelector("#price").value
+            
+            try{
+                // await = pause from here until the request finishes
+                // fetch() = sends an HTTP request to server
+                const res = await fetch("https://glowing-happiness-g4rp5j97xr752w6wj-5000.app.github.dev/items", {
+                    method: "POST",
+                    headers: {"Content-Type" : "application/json"},
+                    body: JSON.stringify({name: name, price: Number(price)})
+
+                } )
+
+                // testing = print the response
+                const data = await res.json()
+                document.querySelector("#response").innerHTML = "Response: " + JSON.stringify(data)
+
+            } catch(error){
+                document.querySelector("#response").innerHTML = "Response: ERROR" + error
+            }
+        })
+
+
+        // LOADING ITEMS
+        async function loaditems(){
+            const res = await fetch("https://glowing-happiness-g4rp5j97xr752w6wj-5000.app.github.dev/items") 
+            const data = await res.json()
+
+            // collect the element to print all items
+            const list = document.querySelector("#itemslist")
+            list.innerHTML = ""
+
+            // use a loop to place each item in the json data to a list
+            for(const id in data){
+                const item = data[id]
+                
+                const li = document.createElement("li")
+                li.innerHTML = `ID = ${id} | Name = ${item.name} | Price = ${item.price} 
+                <button onclick="showupdateform('${id}', '${item.name}', '${item.price}')">Update</button>
+                <button onclick="deleteitem('${id}')">Delete</button>
+                `
+                list.appendChild(li)
+            }
+        }
+
+        // function to update an item
+        function showupdateform(id, name, price){
+            document.querySelector("#updatesection").style.display = "block"
+            document.querySelector("#updateID").value = id
+            document.querySelector("#updateName").value = name
+            document.querySelector("#updatePrice").value = price
+        }        
+
+        // function to update price and name of an item
+        async function updateItem(){
+            const id = document.querySelector("#updateID").value
+            const name = document.querySelector("#updateName").value
+            const price = document.querySelector("#updatePrice").value
+
+            // update the json data in the localhost
+            const res = await fetch(`https://glowing-happiness-g4rp5j97xr752w6wj-5000.app.github.dev/items/${id}`, {
+                method : "PUT",
+                headers: {"Content-type" : "application/json"},
+                body: JSON.stringify({name:name, price: Number(price)})
+            })
+            const html = await res.text()
+            document.body.innerHTML = html
+        }
+
+        // function to remove an item
+        async function deleteitem(id){
+            const res = await fetch(`https://glowing-happiness-g4rp5j97xr752w6wj-5000.app.github.dev/items/${id}`, {
+                method : "DELETE"
+            })
+
+            const html = await res.text()
+            document.body.innerHTML = html
+        }
+
+    </script>
+</body>
+</html>
