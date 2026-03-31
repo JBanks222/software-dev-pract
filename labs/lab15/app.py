@@ -59,7 +59,7 @@ def handle_item(item_id):
             return jsonify({'error' : 'Invalid input'}), 400
         
         items[item_id] = data
-        return render_template('update.html', item_id = item_id, item = data)
+        return jsonify({'item_id': item_id, 'item': data})
     
     # DELETE
     elif request.method == "DELETE":
@@ -71,3 +71,5 @@ def handle_item(item_id):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
