@@ -67,7 +67,7 @@
             try{
                 // await = pause from here until the request finishes
                 // fetch() = sends an HTTP request to server
-                const res = await fetch("https://glowing-happiness-g4rp5j97xr752w6wj-5000.app.github.dev/items", {
+                const res = await fetch("/items", {
                     method: "POST",
                     headers: {"Content-Type" : "application/json"},
                     body: JSON.stringify({name: name, price: Number(price)})
@@ -86,7 +86,7 @@
 
         // LOADING ITEMS
         async function loaditems(){
-            const res = await fetch("https://glowing-happiness-g4rp5j97xr752w6wj-5000.app.github.dev/items") 
+            const res = await fetch("/items") 
             const data = await res.json()
 
             // collect the element to print all items
@@ -121,7 +121,7 @@
             const price = document.querySelector("#updatePrice").value
 
             // update the json data in the localhost
-            const res = await fetch(`https://glowing-happiness-g4rp5j97xr752w6wj-5000.app.github.dev/items/${id}`, {
+            const res = await fetch(`/items/${id}`, {
                 method : "PUT",
                 headers: {"Content-type" : "application/json"},
                 body: JSON.stringify({name:name, price: Number(price)})
@@ -132,7 +132,7 @@
 
         // function to remove an item
         async function deleteitem(id){
-            const res = await fetch(`https://glowing-happiness-g4rp5j97xr752w6wj-5000.app.github.dev/items/${id}`, {
+            const res = await fetch(`/items/${id}`, {
                 method : "DELETE"
             })
 
