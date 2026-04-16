@@ -1,0 +1,65 @@
+* {
+    box-sizing: border-box;
+}
+.maincontainer {
+    width: 900px;
+    margin: 3rem auto;
+    padding: 2rem;
+    
+}
+.title {
+    text-align: center;
+    color: darkblue;
+}
+#taskinput {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    font-size: 1.3rem;
+    border-radius: 8px;
+}
+.btnaddtask{
+    width: 100%;
+    border-radius: 5px;
+    margin-top: 2rem;
+    background-color: blue;
+    padding: 1rem;
+    color: aliceblue;
+    border: none;
+    font-size:1.5rem;
+}
+.btnaddtask:hover {
+    background-color: crimson;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+/* task list styling */
+#taskList {
+    background-color: whitesmoke;
+    margin-top: 2rem;
+    padding-left: 0;
+}
+
+.task-item {
+    list-style: none;
+    padding: 1rem 0.25rem;
+    border-bottom: solid gray 1px;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-delete-item {
+    border: none;
+    margin-right: 1rem;
+    background-color: transparent;
+    color: hotpink;
+    font-size: 1.2rem;
+}
+
+.btn-delete-item:hover {
+    opacity: 0.4;
+    cursor: pointer;
+}
