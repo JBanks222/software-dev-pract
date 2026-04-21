@@ -1,0 +1,88 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    padding: 1.5rem;
+    margin: 0;
+}
+
+.title {
+    text-align: center;
+    color: #3898db;
+}
+
+#uploadForm {
+    background-color: rgb(240, 250, 255);
+    padding: 1.5rem;
+    border-radius: 8px;
+    width: min(900px, 100%);
+    margin: 2rem auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+}
+
+#imageInput {
+    font-size: 1rem;
+    padding: 0.5rem;
+    color: rgb(70, 70, 70);
+}
+
+#imageInput::file-selector-button,
+.btnupload {
+    padding: 0.5rem 1.25rem;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s ease;
+}
+
+#imageInput::file-selector-button {
+    background-color: #3898db;
+}
+
+.btnupload {
+    background-color: darkblue;
+}
+
+#message {
+    text-align: center;
+    font-size: 1.1rem;
+    color: rgb(70, 70, 70);
+    font-style: italic;
+    min-height: 1.25rem;
+}
+
+.subtitle {
+    color: darkblue;
+    text-align: center;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+}
+
+.card {
+    text-align: center;
+    width: 220px;
+    height: 220px;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid #d9e8f2;
+    background: #fff;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
