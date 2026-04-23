@@ -21,12 +21,15 @@
         {% if images %}
             {% for image in images %}
                 <div class="card">
-                    <img src="{{ url_for('static', filename='uploads/' ~ image) }}" alt="{{ image }}">
+                    <img src="{{ url_for('static', filename='uploads/' + image.filename) }}" alt="{{ image.filename }}">
+                    <button type="button" class="btndelete" data-image-id="{{ image.id }}">Delete</button>
                 </div>
             {% endfor %}
         {% else %}
             <p>No images uploaded yet.</p>
         {% endif %}
     </div>
+
+    <script src="{{ url_for('static', filename='uploads/imguploader_script.js') }}"></script>
 </body>
 </html>

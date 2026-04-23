@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 import mysql.connector
 from mysql.connector import Error
 from werkzeug.utils import secure_filename
@@ -72,11 +72,15 @@ def list_uploaded_images():
     init_db()
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute('SELECT filename FROM images ORDER BY uploaded_at DESC, id DESC')
+    cursor.execute('SELECT id, filename FROM images ORDER BY uploaded_at DESC, id DESC')
     rows = cursor.fetchall()
     cursor.close()
     conn.close()
-    return [row[0] for row in rows if row and row[0]]
+    return [
+        {'id': row[0], 'filename': row[1]}
+        for row in rows
+        if row and len(row) > 1 and row[1]
+    ]
 
 
 def save_uploaded_image(filename):
@@ -110,6 +114,27 @@ def index():
     message = request.args.get('message', '')
     return render_template('index.html', images=images, message=message)
 
+@app.route('/delete/<int:image_id>', methods=['DELETE'])
+def delete_image(image_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT filename FROM images WHERE id = %s", (image_id,))
+    image = cursor.fetchone()
+
+    if not image:
+        cursor.close()
+        conn.close()
+        return jsonify({'error': 'Image not found'}), 404
+    filepath = os.path.join(app.config['UPLOAD_FOLDER'], image[0])
+    # delete from database 
+    cursor.execute("DELETE FROM images WHERE id = %s", (image_id,))
+    conn.commit()
+    cursor.close()
+    conn.close()
+    # delete from filesystem
+    if os.path.exists(filepath):
+        os.remove(filepath)
+    return jsonify({'success': True, 'message': 'Image deleted successfully.'}), 200
 
 @app.route('/upload', methods=['POST'])
 def upload_image():
