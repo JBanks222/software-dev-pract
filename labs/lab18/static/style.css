@@ -1,0 +1,49 @@
+*{box-sizing: border-box;}
+.maincontainer{
+    background-color: aliceblue;
+    width: 900px;
+    margin: 2rem auto;
+}
+.footer{
+    background-color: rgb(10, 10, 10);
+    color: aliceblue;
+    text-align: center;
+    
+}
+/*login.html*/
+.title{
+    text-align: center;
+    color: darkblue;
+}
+.form_section input{
+    padding: 0.5rem;
+    width: 100%;
+    border: none;
+}
+.btn_login{
+    color: whitesmoke;
+    background-color: darkblue;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    transition: ease 200ms;
+
+}
+.btn_login:hover, btn_signup:hover{
+    background-color: crimson;
+    font-weight: bolder;
+}
+.signup_div a{
+    margin-top: 1rem;
+    color: darkblue;
+}
+.signup_div a:hover{
+    color: crimson;
+
+}
+.submit_btn{
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    color: greensmoke;
+}

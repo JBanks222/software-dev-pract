@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block sitetitle %}User Login{% endblock %}
+
+{% block content %}
+<h1 class="login_title">User Login</h1>
+<form  method="post" class="login_form">
+    <section class="form_section">
+        <input type="email" name="email" placeholder="Type your email" required/>
+    </section>
+    <button type="submit">Login</button>
+</form>
+
+<div class="signup_div">
+    <p>Don't have an account? <a href="{{url_for('signup')}}">Sign up here</a></p>
+</div>
+{% endblock %}

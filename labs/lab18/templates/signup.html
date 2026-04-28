@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block sitetitle %}Sign Up{% endblock %}
+
+{% block content %}
+<h1>New User Sign Up</h1>
+<form method="post" class="signup_form" onsubmit="return validatePassword()" method="post">
+    <section class="form_section">
+        <input type="text" name="username" placeholder="Type your username" required/>
+    </section>
+    <section class="form_section">
+        <input type="email" name="email" placeholder="Type your email" required/>
+    </section>
+    <section class="form_section">
+        <input type="password" name="password" placeholder="Type your password" required/>
+    </section>
+    <button type="submit" class="submit_btn">Sign Up</button>
+</form>
+
+{%endblock %}
