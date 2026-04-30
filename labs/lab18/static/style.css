@@ -15,35 +15,45 @@
     text-align: center;
     color: darkblue;
 }
+.login_form{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 400px;
+    margin: 1.5rem auto;
+}
 .form_section input{
     padding: 0.5rem;
     width: 100%;
-    border: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
-.btn_login{
+.btn_login, .btn_signup{
     color: whitesmoke;
     background-color: darkblue;
     font-size: 1.2rem;
     border-radius: 5px;
     padding: 0.5rem 1rem;
-    transition: ease 200ms;
-
+    transition: ease 500ms;
+    border: none;
+    cursor: pointer;
+    align-self: flex-start;
 }
-.btn_login:hover, btn_signup:hover{
+.btn_login:hover, .btn_signup:hover{
     background-color: crimson;
     font-weight: bolder;
 }
-.signup_div a{
-    margin-top: 1rem;
+.signup_div{
+    margin-top: 3rem;
     color: darkblue;
+}
+.signup_div a{
+    color: forestgreen;
+    font-size: 1.1rem;
 }
 .signup_div a:hover{
     color: crimson;
-
 }
-.submit_btn{
-    display: flex;
-    justify-content: center;
-    margin-top: 1rem;
-    color: greensmoke;
+.flash_msg{
+    color: crimson;
 }

@@ -16,5 +16,15 @@
     </section>
     <button type="submit" class="submit_btn">Sign Up</button>
 </form>
-
+<div class="signup_div">
+    <p>Already have an account? <a href="{{url_for('login')}}">Log-in</a> </p>
+</div>
+<!-- display the flash message -->
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for msg in messages %}
+            <p class="flash_msg">{{msg}}</p>
+        {% endfor%}
+    {% endif%}
+{% endwith%}
 {%endblock %}
