@@ -33,15 +33,13 @@ def login():
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM users WHERE email = ? and password = ?", (email, password))
         user = cursor.fetchone()
-        conn.close()
-
-
+       
         if user:
             session['username'] = user['username']
             return redirect(url_for('dashboard'))
         else:
             flash('Invalid email or password')
-            
+        conn.close()    
     return render_template('login.html')
 
 #-----------
